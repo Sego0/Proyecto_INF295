@@ -29,7 +29,7 @@ int main() {
     loadImageRGB_asCanvas("instancias/bach.png", P);
 
     // 4) Generar las "random strokes"
-    auto strokes = randomInit(P, 1000);
+    auto strokes = randomInit(P, 500);
 
     // 4) Renderizar resultado
     Canvas result(P.width, P.height);

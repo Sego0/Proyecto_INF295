@@ -239,7 +239,7 @@ std::vector<Stroke> randomInit(const Canvas& target, int maxStrokes) {
     canvas.clear(255, 255, 255);
 
     std::vector<Stroke> strokes;
-
+    //Seteo de rangos aleatorios de tamaño y rotacion
     std::mt19937 rng(std::random_device{}());
     std::uniform_real_distribution<float> sizeDist(0.1f, 0.3f);
     std::uniform_real_distribution<float> rotDist(0.0f, 360.0f);
@@ -253,13 +253,14 @@ std::vector<Stroke> randomInit(const Canvas& target, int maxStrokes) {
         int gy = std::min(GRID - 1, std::max(0, int(yr * GRID)));
         return gy * GRID + gx;
     };
-
+    //Seteo de rangos aleatorios de posicion y color
     std::uniform_real_distribution<float> relDist(0.0f, 1.0f);
     std::uniform_real_distribution<float> relCol(0.0f, 255.0f);
 
     float prevError = error_cuad_medio(target, canvas);
     std::cout << "[Random] Error inicial: " << prevError << "\n";
 
+    //Generacion de trazos
     for (int iter = 0; iter < maxStrokes; ++iter) {
         float bestScore = -1e9;
         Stroke bestStroke;
@@ -270,7 +271,8 @@ std::vector<Stroke> randomInit(const Canvas& target, int maxStrokes) {
         // penalizar zonas ocupadas
         int cell = getCellIndex(xr, yr);
         float penalidad_ocupacion = -0.1f * occupancy[cell];
-
+        
+        //Probar por cada brush
         for (size_t t = 0; t < gBrushes.size(); ++t) {
             Stroke s;
             s.x_rel = xr;
@@ -289,7 +291,7 @@ std::vector<Stroke> randomInit(const Canvas& target, int maxStrokes) {
                 bestStroke = s;
               }
             }
-
+        //Agregar trazo a la solucion
         render({bestStroke}, canvas);
         strokes.push_back(bestStroke);
         occupancy[getCellIndex(bestStroke.x_rel, bestStroke.y_rel)] += 1;

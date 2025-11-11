@@ -8,7 +8,7 @@ Ahora para ejecutar el archivo debemos estar en al archivo raiz y ejecutar los s
   ./output/pruebas
 ```
 
-Esto generar un archivo llamado **output1.cpp** en que se encontrara el lienzo con la imagen de solucion inicial.
+Esto generar un archivo llamado **output1.jpg** en que se encontrara el lienzo con la imagen de solucion inicial.
 
 
 
